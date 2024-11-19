@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق تتبع الحافلات المدرسية</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- القائمة الجانبية -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#">الإرشادات</a>
+        <a href="#">مواعيد الحافلات</a>
+        <a href="#">اتصل بنا</a>
+    </div>
+
+    <!-- محتوى الصفحة -->
+    <div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">☰ القائمة</span>
+        <h1>مرحبًا بكم في تطبيق تتبع الحافلات المدرسية</h1>
+        <div class="bus-info">
+            <p><strong>مواعيد الحافلات:</strong></p>
+            <ul>
+                <li><strong>الخط الأول:</strong> من 7:00 صباحًا إلى 2:30 ظهرًا</li>
+                <li><strong>الخط الثاني:</strong> من 7:30 صباحًا إلى 3:00 ظهرًا</li>
+            </ul>
+        </div>
+
+        <div class="notification" id="busNotification">
+            <p>تنبيه: حافلتك على وشك الوصول!</p>
+        </div>
+
+        <button onclick="checkBusTime()">تحقق من الوقت</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>         console.log("الإذن تم منحه");
+                        sendNotification();  // إرسال إشعار بعد منح الإذن
+                    } else {
+                        console.log("الإذن مرفوض");
+                    }
+                });
+            }
+        }
+
+        // دالة إرسال إشعار مع تأخير (مثال: 5 ثواني بعد منح الإذن)
+        function sendNotification() {
+            if (Notification.permission === "granted") {
+                setTimeout(function() { // تأخير إرسال الإشعار
+                    const notification = new Notification("تنبيه جديد!", {
+                        body: "لقد تم تحديث الحافلة الخاصة بك.",
+                        icon: "icon.png",  // يمكنك إضافة أي أيقونة تريدها
+                    });
+
+                    notification.onclick = function () {
+                        window.location.href = "https://your-website.com";  // رابط يتم فتحه عند النقر على الإشعار
+                    };
+                }, 5000);  // تأخير الإشعار لمدة 5 ثواني
+            } else {
+                console.log("لا يمكن إرسال الإشعار لأن الإذن غير متاح.");
+            }
+        }
+
+        // استدعاء الدالة عند النقر على زر تمكين الإشعارات
+        document.getElementById('enableNotifications').addEventListener('click', function() {
+            requestNotificationPermission();
+        });
+
+        // دالة لتحديد الوقت الحالي ومقارنته مع مواعيد الحافلات
+        function checkBusTime() {
+            const currentTime = new Date();
+            const hours = currentTime.getHours();
+            const minutes = currentTime.getMinutes();
+            const timeInMinutes = hours * 60 + minutes;
+
+            // مواعيد الحافلات (7:00 - 2:30 و 7:30 - 3:00)
+            const firstBusStart = 7 * 60; // 7:00 صباحًا
+            const firstBusEnd = 14 * 60 + 30; // 2:30 ظهرًا
+            const secondBusStart = 7 * 60 + 30; // 7:30 صباحًا
+            const secondBusEnd = 15 * 60; // 3:00 ظهرًا
+
+            // تحقق من الوقت الحالي ومقارنته مع أوقات الحافلات
+            if (timeInMinutes >= firstBusStart && timeInMinutes <= firstBusEnd) {
+                console.log("أنت في وقت الحافلة الأولى (7:00 صباحًا - 2:30 ظهرًا)");
+            } else if (timeInMinutes >= secondBusStart && timeInMinutes <= secondBusEnd) {
+                console.log("أنت في وقت الحافلة الثانية (7:30 صباحًا - 3:00 ظهرًا)");
+            } else {
+                console.log("لا يوجد حافلات حالياً.");
+            }
+        }
+
+        // استدعاء دالة التحقق من الوقت عند تحميل الصفحة
+        window.onload = function() {
+            checkBusTime(); // التحقق من الوقت عند تحميل الصفحة
+        };
+    </script>
+</body>
+</html>

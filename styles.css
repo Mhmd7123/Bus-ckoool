@@ -1,0 +1,124 @@
+/* styles.css */
+
+/* تنسيق الصفحة العامة */
+body {
+    font-family: 'Arial', sans-serif;
+    direction: rtl;
+    background-color: #f0f8ff; /* لون خلفية هادئ */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s ease;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #4CAF50; /* لون أخضر للمحتوى */
+    margin: 20px 0;
+}
+
+/* تصميم القائمة الجانبية */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #333; /* اللون الداكن للقائمة */
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #f1f1f1;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #4CAF50; /* تأثير تغيير اللون عند التمرير */
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* تنسيق النصوص في الصفحة */
+ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1rem;
+}
+
+ul li {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* تصميم الزر */
+button {
+    background-color: #008CBA; /* لون الزر */
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #007B8B;
+}
+
+/* تنسيق الإشعار المنبثق */
+.notification {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    display: none;
+    z-index: 1000;
+}
+
+/* تأثيرات مختلفة لفتح القائمة الجانبية */
+#main {
+    padding: 20px;
+    transition: margin-right 0.5s ease;
+}
+
+#mySidenav {
+    width: 250px;
+}
+
+/* تأثيرات حركة عند النقر على زر التحقق */
+button:active {
+    transform: scale(0.98); /* تصغير الزر عند النقر */
+}
+
+/* تغيير الخلفية عند التفاعل مع الصفحة */
+body.dark-mode {
+    background-color: #333; /* خلفية داكنة لوضع الليل */
+    color: #fff;
+}
+
+/* تنسيق رسومات عند تمرير الماوس */
+ul li:hover {
+    color: #4CAF50;
+    transform: scale(1.1); /* تكبير النص عند التمرير */
+    transition: transform 0.3s ease;
+}
