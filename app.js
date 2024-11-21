@@ -1,5 +1,3 @@
-// script.js
-
 // دالة لفتح القائمة الجانبية
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -50,25 +48,4 @@ function checkBusTime() {
 // وضع الظلام (الوضع الليلي) عند التفاعل مع الزر
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
-}lert("متصفحك لا يدعم ميزة الموقع الجغرافي.");
-    }
 }
-
-// إعداد التطبيق عند اختيار دور المستخدم
-function setupRole(role) {
-    userRole = role;
-    document.getElementById("role-status").textContent =
-        userRole === "student" ? "طالب" : "سائق";
-    document.getElementById("role-selection").style.display = "none";
-    document.getElementById("map-container").style.display = "block";
-    getUserLocation(); // بدء الحصول على الموقع
-}
-
-// أحداث الأزرار
-document.getElementById("student-role").addEventListener("click", () => {
-    setupRole("student");
-});
-
-document.getElementById("driver-role").addEventListener("click", () => {
-    setupRole("driver");
-});
