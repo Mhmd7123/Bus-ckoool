@@ -1,51 +1,51 @@
-// دالة لفتح القائمة الجانبية
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("main").style.marginRight = "250px";
+// دالة لبدء التطبيق وإخفاء شاشة البداية
+function startApp() {
+    document.getElementById('splash-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    checkNotificationTime();
 }
 
-// دالة لإغلاق القائمة الجانبية
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginRight = "0";
+// دالة لعرض نافذة الإرشادات
+function showGuidelines() {
+    document.getElementById('guidelines').style.display = 'block';
 }
 
-// دالة لإظهار الإشعار المنبثق داخل الصفحة
+// دالة لإغلاق نافذة الإرشادات
+function closeGuidelines() {
+    document.getElementById('guidelines').style.display = 'none';
+}
+
+// دالة لعرض الإشعار
 function showNotification(message) {
-    const notification = document.getElementById('busNotification');
-    notification.innerHTML = `<p>${message}</p>`;
-    notification.style.display = 'block';
-
-    // إخفاء الإشعار بعد 5 ثوانٍ
-    setTimeout(function() {
-        notification.style.display = 'none';
-    }, 5000);
+    document.getElementById('notification-message').textContent = message;
+    document.getElementById('notification-popup').style.display = 'flex';
 }
 
-// دالة لتحديد الوقت الحالي ومقارنته مع مواعيد الحافلات
-function checkBusTime() {
-    const currentTime = new Date();
-    const hours = currentTime.getHours();
-    const minutes = currentTime.getMinutes();
-    const timeInMinutes = hours * 60 + minutes;
+// دالة لإغلاق الإشعار
+function closeNotification() {
+    document.getElementById('notification-popup').style.display = 'none';
+}
 
-    // مواعيد الحافلات (7:00 - 2:30 و 7:30 - 3:00)
-    const firstBusStart = 7 * 60; // 7:00 صباحًا
-    const firstBusEnd = 14 * 60 + 30; // 2:30 ظهرًا
-    const secondBusStart = 7 * 60 + 30; // 7:30 صباحًا
-    const secondBusEnd = 15 * 60; // 3:00 ظهرًا
+// التحقق من الوقت الحالي لتحديد الإشعارات
+function checkNotificationTime() {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
 
-    // تحقق من الوقت الحالي ومقارنته مع أوقات الحافلات
-    if (timeInMinutes >= firstBusStart && timeInMinutes <= firstBusEnd) {
-        showNotification("أنت في وقت الحافلة الأولى (7:00 صباحًا - 2:30 ظهرًا)");
-    } else if (timeInMinutes >= secondBusStart && timeInMinutes <= secondBusEnd) {
-        showNotification("أنت في وقت الحافلة الثانية (7:30 صباحًا - 3:00 ظهرًا)");
-    } else {
-        showNotification("لا يوجد حافلات حالياً.");
+    // وقت الحضور (7:30 صباحاً)
+    if (currentHour === 7 && currentMinute === 15) {
+        showNotification('اقترب موعد الحضور! يرجى التجهز.');
+    } else if (currentHour === 7 && currentMinute === 30) {
+        showNotification('حان الآن موعد الحضور!');
     }
-}
 
-// وضع الظلام (الوضع الليلي) عند التفاعل مع الزر
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
+    // وقت الانصراف (2:00 مساءً)
+    if (currentHour === 13 && currentMinute === 45) {
+        showNotification('اقترب موعد الانصراف! استعد للرحيل.');
+    } else if (currentHour === 14 && currentMinute === 0) {
+        showNotification('حان الآن موعد الانصراف!');
+    }
+
+    // تحقق كل دقيقة
+    setTimeout(checkNotificationTime, 60000);
 }
